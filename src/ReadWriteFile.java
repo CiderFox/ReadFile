@@ -9,7 +9,7 @@ import javax.swing.*;
  * The output file has the same name as the selected input file; only with "_out"
  * added at the end of the file name.
  *
- * @author Cassidy Halvorson
+ * @author Cassidy
  *
  */
 public class ReadWriteFile {
