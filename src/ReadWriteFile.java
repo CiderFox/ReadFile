@@ -27,13 +27,19 @@ public class ReadWriteFile {
 
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 
-            // Get the selected file and read it, copying to output file.
+            // Get the selected file.
             File inputFile = fileChooser.getSelectedFile();
 
             // Get output file name.
             String inputFileName = inputFile.toString();
+
+            //delete the .txt part of the file name to receive just the name of the original input file name.
             String baseFileName = inputFileName.substring( 0, inputFileName.length()-4 );
+
+            //add the _out requirement to the output file name.
             String outputFileName = baseFileName.concat( "_out.txt" );
+
+            //create the output file.
             File outputFile = new File( outputFileName );
 
             //Check if the file already exists, delete the file if it does exist to replace with new file.
@@ -41,10 +47,10 @@ public class ReadWriteFile {
                 outputFile.delete();
             }
 
-            // Create output file, using the setOut.
+            // Create output file, using the setOut for what to print in the output file.
             System.setOut( new PrintStream( new FileOutputStream(outputFileName) ) );
 
-            // read text file, copy it, and output it.
+            // read input file and write its contents (if it is not null) to the output file.
             try {
                 // FileReader reads text files.
                 FileReader fileReader = new FileReader(inputFileName);
@@ -56,12 +62,11 @@ public class ReadWriteFile {
                 String line = null;
 
                 // Read the file, if the line is not null then copy it.
-
                 while((line = bufferedReader.readLine()) != null) {
                     System.out.println(line);
                 }
 
-                // Always close files.
+                // Close the reader.
                 bufferedReader.close();
             }
             catch (IOException error) {
